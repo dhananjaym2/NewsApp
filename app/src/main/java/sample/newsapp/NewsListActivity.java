@@ -61,7 +61,7 @@ public class NewsListActivity extends AppCompatActivity implements View.OnClickL
             if (hits != null) {
               hits.clear();
             }
-            adapter.notifyItemRangeRemoved(0, 0);
+            adapter.notifyDataSetChanged();
           }
           getNewsListForSearch(editTextSearchFromUser.getText().toString().trim(), 0);
         } else {
