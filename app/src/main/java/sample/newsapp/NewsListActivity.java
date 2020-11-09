@@ -89,7 +89,7 @@ public class NewsListActivity extends AppCompatActivity implements View.OnClickL
       if (adapter != null) {
         // notify new data has been added.
         int currentHitsCount = hits.size();
-        hits.addAll(response.body().getHits());// TODO test this
+        hits.addAll(response.body().getHits());
         adapter.notifyItemRangeInserted(currentHitsCount, response.body().getHits().size());
       } else {
         hits = response.body().getHits();
