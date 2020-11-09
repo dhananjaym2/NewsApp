@@ -1,0 +1,10 @@
+<resources>
+  <string name="app_name">News App</string>
+  <string name="searchHere">Search here</string>
+  <string name="search">Search</string>
+  <string name="emptySearch">Please enter a keyword to search for news.</string>
+  <string name="internetNotConnected">Please connect your mobile device to a working internet connection.</string>
+  <string name="noMoreSearchResults">No more search results.</string>
+  <string name="newsItemTitle">News item title</string>
+  <string name="loading">Loading</string>
+</resources>
