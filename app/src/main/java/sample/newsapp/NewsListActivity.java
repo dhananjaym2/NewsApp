@@ -52,9 +52,7 @@ public class NewsListActivity extends AppCompatActivity implements View.OnClickL
       if (NetworkUtils.isConnectedToInternet(this)) {
         if (editTextSearchFromUser.getText().toString() != null
             && editTextSearchFromUser.getText().toString().trim().length() >= 0) {
-          // TODO show progress loader
-          progressDialog = getProgressDialogToShow();
-          progressDialog.show();
+          showProgressDialog();
           getNewsListForSearch(editTextSearchFromUser.getText().toString().trim(), 0);
         } else {
           showToastMessage(getString(R.string.emptySearch));
@@ -65,11 +63,11 @@ public class NewsListActivity extends AppCompatActivity implements View.OnClickL
     }
   }
 
-  private ProgressDialog getProgressDialogToShow() {
-    ProgressDialog progressDialog = new ProgressDialog(this);
+  private void showProgressDialog() {
+    progressDialog = new ProgressDialog(this);
     progressDialog.setMessage(getString(R.string.loading));
     progressDialog.setCancelable(false);
-    return progressDialog;
+    progressDialog.show();
   }
 
   private void getNewsListForSearch(String searchQuery, int pageNum) {
@@ -78,13 +76,18 @@ public class NewsListActivity extends AppCompatActivity implements View.OnClickL
     apiController.getNewsListForSearch(searchQuery, pageNum, this);
   }
 
+  private void dismissProgressDialog() {
+    if (progressDialog != null && progressDialog.isShowing()) {
+      progressDialog.dismiss();
+    }
+  }
+
   private void showToastMessage(String msg) {
     Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
   }
 
   @Override public void onSuccess(Response<SearchNewsResponse> response) {
-    progressDialog.dismiss();
-    //Log.d(logTag, "onSuccess");
+    dismissProgressDialog();
     if (response.body() != null && response.body().getNbPages() != 0) {
       // TODO SAVE data for offline
       if (adapter != null) {
@@ -105,7 +108,7 @@ public class NewsListActivity extends AppCompatActivity implements View.OnClickL
   }
 
   @Override public void onError(Throwable t) {
-    progressDialog.dismiss();
+    dismissProgressDialog();
   }
 
   @Override public void onItemClick(String url) {
