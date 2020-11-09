@@ -8,4 +8,6 @@
   <string name="newsItemTitle">News item title</string>
   <string name="loading">Loading</string>
   <string name="urlNotAvailable">URL not available.</string>
+  <string name="unableToGetResolvingApps">Unable to get applications to open this URL</string>
+  <string name="somethingWentWrong">Something went wrong.</string>
 </resources>

@@ -2,6 +2,7 @@ package sample.newsapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -168,6 +169,7 @@ public class NewsListActivity extends AppCompatActivity implements View.OnClickL
     dismissProgressDialog();
     alreadyLoadingNextPage = false;
     isInErrorState = true;
+    showToastMessage(getString(R.string.somethingWentWrong));
   }
 
   @Override public void onItemClick(String url) {
@@ -175,8 +177,14 @@ public class NewsListActivity extends AppCompatActivity implements View.OnClickL
       showToastMessage(getString(R.string.urlNotAvailable));
       return;
     }
+
     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-    startActivity(intent);
+    List<ResolveInfo> intentResolveList = getPackageManager().queryIntentActivities(intent, 0);
+    if (intentResolveList.size() > 0) {
+      startActivity(intent);
+    } else {
+      showToastMessage(getString(R.string.unableToGetResolvingApps));
+    }
   }
 
   private void showProgressDialog() {
