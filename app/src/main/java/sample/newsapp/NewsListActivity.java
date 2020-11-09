@@ -100,6 +100,9 @@ public class NewsListActivity extends AppCompatActivity implements View.OnClickL
         adapter = new NewsListAdapter(this, hits, this);
         // set adapter of recycler
         recyclerViewNewsList.setLayoutManager(new LinearLayoutManager(this));
+        int VERTICAL_SPACING = 6;
+        VerticalSpaceItemDecoration itemDec = new VerticalSpaceItemDecoration(VERTICAL_SPACING);
+        recyclerViewNewsList.addItemDecoration(itemDec);
         recyclerViewNewsList.setAdapter(adapter);
         recyclerViewNewsList.addOnScrollListener(new RecyclerView.OnScrollListener() {
           /**
