@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -173,7 +174,7 @@ public class NewsListActivity extends AppCompatActivity implements View.OnClickL
   }
 
   @Override public void onItemClick(String url) {
-    if (url == null) {
+    if (TextUtils.isEmpty(url)) {
       showToastMessage(getString(R.string.urlNotAvailable));
       return;
     }
